@@ -23,7 +23,7 @@ try:
         "password": password_list,
     }
 # MAKES A SAVE FILE IF THERE IS NONE ONLY TRIGGERS IF TRY FAILS
-except:
+except FileNotFoundError:
     with open("accounts_data.csv", 'w') as file:
         data_dict = {
             "username": [],
