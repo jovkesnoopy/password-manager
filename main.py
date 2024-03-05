@@ -66,8 +66,23 @@ if pin == 1234:
         frame2.grid_forget()  # Hide frame2
         frame1.grid(row=0, column=0, sticky='nsew')  # Show frame1
 
-
+    # Also generates buttons and entries in frame 2
     def switch_to_frame2():
+        accounts = pandas.read_csv("accounts_data.csv")
+
+        r = 1
+        for account in accounts.website:
+            button = Button(frame2, text=account, width=13)
+            button.grid(column=0, row=r)
+            r += 1
+
+        r = 1
+
+        for password in accounts.password:
+            entry = Entry(frame2, width=22, justify="center")
+            entry.insert(0, password)
+            entry.grid(column=1, row=r)
+            r += 1
         frame1.grid_forget()  # Hide frame1
         frame2.grid(row=0, column=0, sticky='nsew')  # Show frame2
 
@@ -145,30 +160,12 @@ if pin == 1234:
     get_password_button.grid(column=1, row=5, columnspan=2)
 
     # Labels and buttons for second frame
-    accounts_label = Label(frame2, text="Accounts:", font=("courier", 13))
+    accounts_label = Label(frame2, text="Accounts:", font=("", 13))
     accounts_label.grid(column=0, row=0)
-    passwords_label = Label(frame2, text="Passwords:", font=("courier", 13))
+    passwords_label = Label(frame2, text="Passwords:", font=("", 13))
     passwords_label.grid(column=1, row=0, pady=20)
     back_button = Button(frame2, text="Back", command=switch_to_frame1)
     back_button.grid(column=2)
-
-    # Generate buttons and labels for second frame with names from dictionary
-
-    accounts = pandas.read_csv("accounts_data.csv")
-
-    r = 1
-    for account in accounts.website:
-        button = Button(frame2, text=account, width=13)
-        button.grid(column=0, row=r)
-        r += 1
-
-    r = 1
-
-    for password in accounts.password:
-        entry = Entry(frame2, width=22, justify="center")
-        entry.insert(0, password)
-        entry.grid(column=1, row=r)
-        r += 1
 
     frame1.grid(row=0, column=0, sticky='nsew')
 
